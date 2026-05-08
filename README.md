@@ -1,1 +1,1 @@
-# java-basic-with-jdk17
+# java-basic
