@@ -1,0 +1,97 @@
+
+
+** OOPS (Object-Oriented Programming System)
+
+1. Encapsulation
+- Wrapping data and methods together in one unit.
+
+2. Inheritance
+- One class acquires properties of another class.
+
+3. Polymorphism
+- Same method behaves differently.
+
+4. Abstraction
+- Hiding internal implementation and showing only important details.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Static Member & Their execution
+
+- Class level context, can't be inherited & it's common for all object
+
+1. Static Block
+
+- When class loaded into JVM first static block gets executed before main
+- If multiple static block in order it is defined same order it will get executed
+
+package com.javabasic.staticcontext;
+
+public class StaticBlock {
+	public static void main(String[] args) {
+		System.out.println("Inside main method");
+	}
+
+	static {
+		System.out.println("Inside static block 2");
+	}
+
+	static {
+		System.out.println("Inside static block 1");
+	}
+}
+/*
+OUTPUT : 
+Inside static block 2
+Inside static block 1
+Inside main method
+*/
+
+2. Static Method
+
+package com.javabasic.staticcontext;
+
+public class StaticMethod {
+
+	static {
+		StaticMethod.method();
+		System.out.println("Inside static block");
+	}
+
+	public static void method() {
+		System.out.println("Inside static method");
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Inside main method");
+		StaticMethod.method();
+	}
+}
+/*
+OUTPUT :
+Inside static method
+Inside static block
+Inside main method
+Inside static method
+*/
+
+3. Static Varibale
+
+package com.javabasic.staticcontext;
+
+public class StaticVariable {
+
+	public static int staticNum;
+
+	public static void main(String[] args) {
+		System.out.println("Inside main method : " + StaticVariable.staticNum);
+	}
+}
+/*
+OUTPUT :
+Inside main method : 0
+*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+** Non-Static Member & Their execution
+
+- Object level context
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
