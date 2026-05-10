@@ -643,4 +643,94 @@ public class MyThread extends Thread {
 	}
 }
 
+12. Thread Group
+- We can create group of thread which performs sam operation
+
+A. ThreadGroup
+
+system (root thread group)
+   ├── main
+   │     ├── main thread
+   │     └── user threads
+   │
+   ├── Finalizer
+   |── SignalDispatcher
+   └── other JVM internal groups
+
+package com.javabasic.thread.threadgroup;
+
+public class ThreadGroupDemo {
+
+	public static void main(String[] args) {
+		System.out.println(Thread.currentThread().getThreadGroup().getName());
+		System.out.println(Thread.currentThread().getThreadGroup().getParent().getName());
+
+		ThreadGroup parentGroup = new ThreadGroup("Parent");
+		System.out.println(parentGroup.getName());
+		
+		ThreadGroup childGroup = new ThreadGroup(parentGroup,"Child");
+		System.out.println(childGroup.getName());//Child
+		System.out.println(childGroup.getParent().getName());//Parent
+		System.out.println(childGroup.getParent().getParent().getName());//main
+		System.out.println(childGroup.getParent().getParent().getParent().getName());//system
+	}
+}
+
+B. ThreadGroup Priority
+- We can set priority to group which then gets applied to all thread which is created under same group
+- If any thread sets their own priority it will override group priority, but we can set priority which is less than group priority not higher
+- Custom group not allowed to set priority more than 5
+
+package com.javabasic.thread.threadgroup;
+
+public class ThreadGroupPriorityDemo {
+
+	public static void main(String[] args) {
+
+		ThreadGroup parentGroup = new ThreadGroup("Parent");
+		System.out.println(parentGroup.getName());
+
+		ThreadGroup childGroup = new ThreadGroup(parentGroup, "Child");
+		System.out.println(childGroup.getName());
+
+		childGroup.setMaxPriority(4);
+		Thread thread1 = new Thread(childGroup, "Thread 1");
+		Thread thread2 = new Thread(childGroup, "Thread 2");
+		Thread thread3 = new Thread(childGroup, "Thread 3");
+		thread3.setPriority(3);
+		System.out.println(thread1.getName() + " : " + thread1.getPriority());//4
+		System.out.println(thread2.getName() + " : " + thread2.getPriority());//4
+		System.out.println(thread3.getName() + " : " + thread3.getPriority());//3
+	}
+}
+
+13. Daemon Thread
+
+- Thread which is running in the background and asses other threads, such as garbage collector
+- We can check if thread is daemon using isDaemon() & also we can set thread a daemon using setDaemon(true) method
+- We can set before thread start execution
+
+package com.javabasic.thread.daemonthread;
+
+public class DaemonThreadDemo {
+
+	public static void main(String[] args) {
+		System.out.println(Thread.currentThread().isDaemon());
+		MyThread myThread = new MyThread();
+		// After main threads complete execution this thread will also marked as completed as it's daemon thread
+		myThread.setDaemon(true);
+		myThread.start();
+		System.out.println(myThread.isDaemon());
+	}
+}
+
+14. Deadlock
+
+- Two or more threads are permanently waiting for each other’s lock.
+- Code can be found at package com.javabasic.thread.threaddeadlock;
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Executor Framework
+
+-
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
