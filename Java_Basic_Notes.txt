@@ -91,7 +91,556 @@ OUTPUT :
 Inside main method : 0
 */
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ** Non-Static Member & Their execution
 
 - Object level context
+
+1. Non-Static Block
+
+- It will gets executed when new object being created & before constructor
+
+package com.javabasic.nonstaticcontext;
+
+public class NonStaticBlock {
+
+	{
+		System.out.println("Inside non static block");
+	}
+
+	NonStaticBlock() {
+		System.out.println("Inside constructor");
+	}
+
+	public static void main(String[] args) {
+		System.out.println("Inside main method");
+		new NonStaticBlock();
+	}
+}
+/*
+OUPPUT:
+Inside main method
+Inside non static block
+Inside constructor
+*/
+
+2. Non-Static Method/Variable 
+
+- We can access this by object reference or this keyword which points to current object
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Datatype/Casting/Promotion
+
+1. Datatype
+
+A. Primitive
+
+| Primitive Data Types |
+| -------------------- |
+| `byte`               |
+| `short`              |
+| `int`                |
+| `long`               |
+| `float`              |
+| `double`             |
+| `char`               |
+| `boolean`            |
+
+B. Non-Primitive (References)
+
+| Non-Primitive Data Types |
+| ------------------------ |
+| String                   |
+| Arrays                   |
+| Classes                  |
+| Interfaces               |
+| Enums                    |
+| Objects                  |
+| Collections              |
+| Wrapper Classes          |
+
+2. Type Casting
+
+- Converting one data type into another data type.
+
+A. Implicit
+- Automatic from small type to higher type
+
+Example :
+
+int a = 10;
+double b = a;
+
+B. Explicit
+- Manual from large type to small
+
+Example :
+
+double d = 10.5;
+int a = (int)d;
+
+3. Promotion
+
+- In arithmetic operation data type converted into respective operation type
+
+Example :
+char ch = 'A';
+int x = ch + 1;
+Output : 66 (A = 65 in ASCI)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Wrapper Classes & Boxing Unboxing
+
+- Wrapper classes convert primitive data types into objects.
+
+A. Boxing - Converting data type to Object type
+B. Unboxing - Converting Object to primitive data type 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Operator & Assingment
+
+- In java expression gets executed from left to right 
+
+1. Increment/Decrement
+
+A. Pre-Increment/Decrement
+- First increment then assign to variable
+- ++X & --X
+
+B. Post-Increment/Decrement
+- First assign to variable then increment
+- X++ & X--
+
+2. Arithmatic Operator
+-  +,-,*,/,%
+
+3. Relational Operator
+- <,>,<=,>=
+
+4. Bitwise Operator
+- &(both true), |(either true), ^(Both should not be same), ~(Flip bits), !(change true/false)
+
+5. Short Circuite Operator
+- && , ||
+- Difference between single and double is this one don't evaluated 2nd condition if first one meet criteria
+
+6. Ternary Operator
+- expression/condition ? If true execute this : if false execute this; 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Flow Controle
+
+A. Selection Statement
+- if-else, switch
+
+B. Iterative Statement
+- while, do-while, for, for-each
+
+C. Transfer Statement
+- break, continue, return, try-catch-finally, assert
+
+D. Labelled Block & Break
+
+package com.javabasic.nonstaticcontext;
+
+public class LabelledBlock {
+
+	public static void main(String[] args) {
+		int x = 2;
+		myblock: {
+			System.out.println("Inside labelled block");
+
+			if (x == 2) {
+				break myblock;
+			}
+			System.out.println("After break block");
+		}
+	}
+}
+/*
+OUTPUT :
+Inside labelled block
+*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Access Modifier
+
+| Modifier             | Same Class | Same Package | Subclass (Other Package) | Other Package |
+| -------------------- | ---------- | ------------ | ------------------------ | ------------- |
+| private              | ✅         | ❌          | ❌                       | ❌            |
+| default (no keyword) | ✅         | ✅          | ❌                       | ❌            |
+| protected            | ✅         | ✅          | ✅                       | ❌            |
+| public               | ✅         | ✅          | ✅                       | ✅            |
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** MultiThreading
+
+- Executing multiple threads simultaneously inside a program.
+- a lightweight sub-process.
+
+1. Single Thread
+
+- normal java program is single thread program which is main thread
+
+package com.javabasic.thread;
+
+public class SingleThread {
+
+	// Main thread which will execute all code as per flow
+	public static void main(String[] args) {
+		SingleThread singleThread = new SingleThread();
+		singleThread.printNumbers();
+		for (int i = 0; i <= 100; i++) {
+			System.out.println("i :" + i + "\t");
+		}
+	}
+
+	public void printNumbers() {
+		for (int i = 0; i <= 100; i++) {
+			System.out.println("j :" + i + "\t");
+		}
+	}
+}
+
+2. Multi Threading Using Thread Class
+
+package com.javabasic.thread;
+
+public class MultiThread extends Thread {
+
+	// Main thread which will execute all code as per flow
+	public static void main(String[] args) {
+		MultiThread thread = new MultiThread();
+		// start() will create new thread and execute run() method which is from Thread
+		thread.start();
+		for (int i = 0; i <= 100; i++) {
+			System.out.println("i :" + i + "\t");
+		}
+	}
+
+	@Override
+	public void run() {
+		for (int i = 0; i <= 100; i++) {
+			System.out.println("j :" + i + "\t");
+			// Added just to check multi threading in action
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+3. sleep() Method
+- sleep() is used to pause the execution of current thread for a specific time.
+
+4. join() Method
+- join() is used to make one thread wait until another thread completes execution.
+
+package com.javabasic.thread;
+
+public class JoinMethodInMultiThread extends Thread {
+
+	public int num;
+
+	JoinMethodInMultiThread(int num) {
+		this.num = num;
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		JoinMethodInMultiThread thread1 = new JoinMethodInMultiThread(3);
+		JoinMethodInMultiThread thread2 = new JoinMethodInMultiThread(4);
+		JoinMethodInMultiThread thread3 = new JoinMethodInMultiThread(5);
+
+		thread1.start();
+		thread2.start();
+		thread3.start();
+
+		// Other thread wait for this thread to be completed
+		thread1.join();
+		thread2.join();
+		thread3.join();
+	}
+
+	@Override
+	public void run() {
+		for (int i = 0; i <= 3; i++) {
+			this.num += i;
+		}
+		System.out.println("Result : " + this.num);
+	}
+}
+
+5. Thread Identity
+- Information that uniquely identifies a thread.
+- name, ID, priority, state
+
+package com.javabasic.thread;
+
+public class ThreadIdentity extends Thread {
+
+	public static void main(String[] args) {
+		ThreadIdentity threadIdentity = new ThreadIdentity();
+		threadIdentity.start();
+		Thread thread = Thread.currentThread();
+		System.out.println("Current Thread Name : " + thread.getName());
+	}
+
+	@Override
+	public void run() {
+		Thread thread = Thread.currentThread();
+		System.out.println("Current Thread Name : " + thread.getName());
+	}
+
+}
+
+6. Thread Priority
+- importance level given to a thread for CPU scheduling.
+- 1-10 range and 1 is lowest and 10 is highest, by default 5 is set as priority
+- Also depends on JVM how it will execute thread
+
+package com.javabasic.thread;
+
+public class ThreadPriority extends Thread {
+
+	public static void main(String[] args) {
+		ThreadPriority thread1 = new ThreadPriority();
+		thread1.setPriority(MIN_PRIORITY);
+		thread1.setName("my-first-thread");
+
+		ThreadPriority thread2 = new ThreadPriority();
+		thread2.setPriority(MAX_PRIORITY);
+		thread2.setName("my-first-thread");
+
+		thread1.start();
+		thread2.start();
+
+		Thread thread = Thread.currentThread();
+		System.out.println("Thread priority of thread " + thread.getName() + " : " + thread.getPriority());
+	}
+
+	@Override
+	public void run() {
+		Thread thread = Thread.currentThread();
+		System.out.println("Thread priority of thread " + thread.getName() + " : " + thread.getPriority());
+	}
+}
+/*
+OUTPUT :
+Thread priority of thread main : 5
+Thread priority of thread my-first-thread : 10
+Thread priority of thread my-first-thread : 1
+*/
+
+7. Multi Thread Using Runnable
+- Runnable is interface which contain run() method
+- We need to create Thread object to execute thread
+
+package com.javabasic.thread;
+
+public class ThreadUsingRunnable implements Runnable {
+
+	public static void main(String[] args) {
+		ThreadUsingRunnable runnable = new ThreadUsingRunnable();
+		Thread thread = new Thread(runnable);
+		thread.start();
+	}
+
+	@Override
+	public void run() {
+		System.out.println("Thread name is : " + Thread.currentThread().getName());
+	}
+}
+
+8. yield() Method
+- yield() is used to temporarily pause current thread and give chance to other threads of same priority to execute.
+- This is also depends on JVM it may be ignored
+
+package com.javabasic.thread;
+
+public class YieldMethodInThread extends Thread {
+
+	public static void main(String[] args) {
+
+		YieldMethodInThread thread = new YieldMethodInThread();
+		thread.start();
+		for (int i = 0; i <= 10; i++) {
+			System.out.println("Message number from main : " + i);
+		}
+	}
+
+	@Override
+	public void run() {
+		for (int i = 0; i <= 10; i++) {
+			System.out.println("Message number : " + i);
+			Thread.yield();
+		}
+	}
+}
+
+9. interrupt() Method
+- interrupt() is used to interrupt or signal a thread that it should stop what it is doing.
+
+package com.javabasic.thread;
+
+public class InterruptMethodInThread extends Thread {
+
+	public static void main(String[] args) {
+		InterruptMethodInThread thread = new InterruptMethodInThread();
+		thread.start();
+
+		thread.interrupt();
+
+		System.out.println("End of main thread");
+	}
+
+	@Override
+	public void run() {
+		try {
+			for (int i = 0; i <= 10; i++) {
+				System.out.println("I'm lazy thread");
+				Thread.sleep(2000);
+			}
+		} catch (Exception e) {
+			System.out.println("System got interrupted by thread " + Thread.currentThread().getName());
+		}
+
+	}
+}
+
+10. Synchronization
+- synchronized is keyword which allow only one thread at a time to access shared resource/code.
+- When we use synchronized if any thread access this it will add lock on that part
+
+A. Object/Method level lock
+- Marking non-static method as synchronized
+
+public synchronized void sayHello(String name) {
+	System.out.println("How are you :" + name);
+
+	try {
+		Thread.sleep(1000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+}
+
+B. Class Level Lock
+- When we use synchronized on static method, once method gets called it apply lock on Class
+- When Class level lock is applied only static method can't be accessed other we can access
+
+package com.javabasic.thread.synchronization.classlevellock;
+
+public class DisplayMessage {
+
+	public synchronized static void sayHello1(String name) {
+		for (int i = 0; i <= 10; i++) {
+			System.out.println("How are you m1 : " + name);
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public synchronized static void sayHello2(String name) {
+		for (int i = 0; i <= 10; i++) {
+			System.out.println("How are you m2 : " + name);
+
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+C. Synchronized Block
+- We can add synchronized block inside method, that particular code only can't be accessed by any other thread
+- We can pass current object by this keyword any other object & Class level lock by using ClassName.class
+
+package com.javabasic.thread.synchronization.block;
+
+public class DisplayMessage {
+
+	public void sayHello(String name) {
+
+		System.out.println("Can be executed all thread");
+
+		synchronized (this) {
+			for (int i = 0; i <= 10; i++) {
+				System.out.println("How are you m1 : " + name);
+
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		//OR 
+		//This will apply class level lock
+		synchronized (DisplayMessage.class) {
+			for (int i = 0; i <= 10; i++) {
+				System.out.println("How are you m1 : " + name);
+
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+}
+
+11. InterThread Communication
+- wait(), notify(), notifyAll() by using this we can communicate within thread
+
+-> Main thread which is going into wait state
+
+package com.javabasic.thread.threadcommunication;
+
+public class ThreadCommunicationDemo {
+
+	public static void main(String[] args) throws InterruptedException {
+		MyThread myThread = new MyThread();
+		myThread.start();
+		synchronized (myThread) {
+			System.out.println("Main thread going to wait");
+			myThread.wait();
+			System.out.println("Main thread notifed");
+		}
+		System.out.println(myThread.total);
+	}
+}
+
+-> Child thread which is created by run() method getting executed and it will notify to main thread and then main gets executed
+
+package com.javabasic.thread.threadcommunication;
+
+public class MyThread extends Thread {
+
+	public int total;
+
+	@Override
+	public void run() {
+		System.out.println("Child thread calculating sum : ");
+		synchronized (this) {
+			for (int i = 0; i <= 10; i++) {
+				total += i;
+			}
+			this.notify();
+		}
+
+	}
+}
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
