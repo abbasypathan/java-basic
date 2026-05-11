@@ -1189,5 +1189,296 @@ public class ImmutableDemo {
 
 ** IO Streams
 
-- 
+- Stream is logical handle which we can read data and write data
+- Java supports 4 type of stream 
+
+A. ByteStreams : One byte at a time 
+- InputStream & OutputStream are abstract classes
+- FileOutputStream & FileInputStream are the classes we use for byte
+
+B. CharacterStreams : Unicode/One character at a time 
+- Reader & Writer are abstract classes for character stream
+- FileReader & FileWriter are the classes for character stream
+
+C. BufferedStream : Wrapper to byte & character , allow us to read more data
+D. ObjectStream : Read object at a time
+
+
+1. FileInputStream
+
+package com.javabasic.iostreams;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class FileInputStreamDemo {
+
+	public static void main(String[] args) {
+		FileInputStream fileInputStream = null;
+		File file = new File("/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/myfile.txt");
+		try {
+			fileInputStream = new FileInputStream(file);
+			System.out.println("File Opened");
+			int i;
+			while ((i = fileInputStream.read()) != -1) {
+				System.out.print((char) i);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fileInputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("\nFile Closed");
+		}
+	}
+
+}
+
+2. FileOutputStream
+
+package com.javabasic.iostreams;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class FileOutputStreamDemo {
+
+	public static void main(String[] args) {
+		FileInputStream fileInputStream = null;
+		FileOutputStream fileOutputStream = null;
+		File fileInput = new File(
+				"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/myfile.txt");
+		File fileOutput = new File(
+				"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/myfileOutput.txt");
+		try {
+			fileInputStream = new FileInputStream(fileInput);
+			fileOutputStream = new FileOutputStream(fileOutput);
+			System.out.println("File Opened");
+			int i;
+			while ((i = fileInputStream.read()) != -1) {
+				fileOutputStream.write(i);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fileInputStream.close();
+				fileOutputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("\nFile Closed");
+		}
+	}
+}
+
+3. FileReader & FileWriter
+- Read charachter
+
+package com.javabasic.iostreams;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+
+public class ReaderAndWriterDemo {
+
+	public static void main(String[] args) throws Exception {
+		FileReader fileReader = null;
+		FileWriter fileWriter = null;
+
+		fileReader = new FileReader(
+				"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/myfile.txt");
+		fileWriter = new FileWriter(
+				"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/myfileOutput1.txt");
+
+		int ch;
+
+		while ((ch = fileReader.read()) != -1) {
+			fileWriter.write(ch);
+		}
+		fileReader.close();
+		fileWriter.close();
+	}
+}
+
+4. StringTokenizer
+- Gives each word as token, we can manually create tokens based on deluminator
+
+package com.javabasic.iostreams;
+
+import java.util.StringTokenizer;
+
+public class StringTokenizerDemo {
+
+	public static void main(String[] args) {
+		String s = "You are the creator of your destiny";
+		StringTokenizer stringTokenizer = new StringTokenizer(s);
+
+		while (stringTokenizer.hasMoreTokens()) {
+			System.out.println(stringTokenizer.nextToken());
+		}
+	}
+}
+
+5. BufferedReader
+
+- It will read each line at once
+
+package com.javabasic.iostreams;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+public class BuffredReaderDemo {
+
+	public static void main(String[] args) throws Exception {
+		FileReader fileReader = new FileReader(
+				"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/myfile.txt");
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			System.out.println(line);
+		}
+		bufferedReader.close();
+	}
+}
+
+6. BufferedWriter
+- Write line by line
+
+7. Try with Resources
+- JVM will close automatically no need to close manually 
+
+try (Resource resource = new Resource()) {
+
+    // use resource
+
+} catch (Exception e) {
+
+    e.printStackTrace();
+}
+
+8. Serialization/ObjectInputStream/ObjectOutputStream
+
+- Serializable is marker interface just to notify JVM that particular object is mark for Serialization/Deserialization
+- If any filed we don't want to serialize we can mark as transient 
+
+package com.javabasic.iostreams.serialization;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class SerializationDemo {
+
+	public static void main(String[] args) {
+
+		FileOutputStream fileOutputStream = null;
+		ObjectOutputStream objectOutputStream = null;
+
+		try {
+			fileOutputStream = new FileOutputStream(
+					"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/serialization/Emp.ser");
+			objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+			Employeee employeee = new Employeee(1, "Abbas", 4500, 23456);
+			objectOutputStream.writeObject(employeee);
+			System.out.println("Employee Object Serialized");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fileOutputStream.close();
+				objectOutputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+package com.javabasic.iostreams.serialization;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+public class DeserializationDemo {
+
+	public static void main(String[] args) {
+
+		FileInputStream fileInputStream = null;
+		ObjectInputStream objectInputStream = null;
+
+		try {
+			fileInputStream = new FileInputStream(
+					"/Users/abbas/Abbas/Java/java-basic/JavaBasic/src/com/javabasic/iostreams/serialization/Emp.ser");
+			objectInputStream = new ObjectInputStream(fileInputStream);
+
+			Object obj = objectInputStream.readObject();
+			Employeee employeee = (Employeee) obj;
+			System.out.println(employeee.id);
+			System.out.println(employeee.name);
+			System.out.println(employeee.salary);
+			System.out.println(employeee.ssn);
+
+			System.out.println("Employee Object Deserialized");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fileInputStream.close();
+				objectInputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+9. Scanner
+- Read from user/keyoard
+
+package com.javabasic.iostreams;
+
+import java.util.Scanner;
+
+public class ScannerDemo {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter student id, name, score");
+		int id = scanner.nextInt();
+		String name = scanner.next();
+		double score = scanner.nextDouble();
+		System.out.println(id);
+		System.out.println(name);
+		System.out.println(score);
+		scanner.close();
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Arrays
+- Group of elements of homogenous type(same data type)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
