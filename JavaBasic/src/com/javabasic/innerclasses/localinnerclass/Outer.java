@@ -1,4 +1,4 @@
-package com.javabasic.localinnerclass;
+package com.javabasic.innerclasses.localinnerclass;
 
 public class Outer {
 

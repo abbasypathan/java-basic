@@ -1,4 +1,4 @@
-package com.javabasic.staticinnerclass;
+package com.javabasic.innerclasses.staticinnerclass;
 
 public class Outer {
 

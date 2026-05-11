@@ -1,4 +1,4 @@
-package com.javabasic.nonstaticinnerclass;
+package com.javabasic.innerclasses.nonstaticinnerclass;
 
 public class AccessingOuterClassMember {
 

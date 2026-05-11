@@ -1,4 +1,4 @@
-package com.javabasic.anonymousinner;
+package com.javabasic.innerclasses.anonymousinner;
 
 public interface Connection {
 
