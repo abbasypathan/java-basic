@@ -732,5 +732,146 @@ public class DaemonThreadDemo {
 
 ** Executor Framework
 
--
+- Their are limitation creating thread using traditional way
+- Time & resource consuming
+- Poor resource management
+- Not robust(If million request comes it will try to create same number of thread which result in system crash)
+
+1. Executor Framework
+
+- It allow us to create thread
+- It create thread pool & assign thread for execution once execution complete insted of destroying thread it assign back to the pool
+- Executor framework manages lifecycle of the thread
+
+package com.javabasic.thread.executorframework;
+
+public class CheckProcessorTask implements Runnable {
+
+	String name;
+
+	CheckProcessorTask(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void run() {
+		System.out.println(this.name + " Check processor has begin processing " + Thread.currentThread().getName());
+
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Check processor has been completed " + Thread.currentThread().getName());
+	}
+}
+
+
+package com.javabasic.thread.executorframework;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ExecutorFrameworkDemo {
+
+	public static void main(String[] args) {
+		CheckProcessorTask[] checkProcessorTasks = { new CheckProcessorTask("ATM"), new CheckProcessorTask("Bank"),
+				new CheckProcessorTask("Mobile"), new CheckProcessorTask("Web") };
+
+		ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(2);
+		for (CheckProcessorTask checkProcessorTask : checkProcessorTasks) {
+			newFixedThreadPool.submit(checkProcessorTask);
+			// newFixedThreadPool.execute(checkProcessorTask);
+		}
+		newFixedThreadPool.shutdown();
+	}
+}
+
+2. Callable & Future
+
+- Callable & Future work together to allow a thread to return a result after completing a task, which is a major limitation of the traditional Runnable interface
+- Callable is functional interface with generic return type method as call()
+
+package com.javabasic.thread.callableandfuture;
+
+import java.util.concurrent.Callable;
+
+public class MyCallable implements Callable<Integer> {
+
+	int num;
+
+	@Override
+	public Integer call() throws Exception {
+		System.out.println(Thread.currentThread().getName() + " is calculating sum of number up to " + this.num);
+		int sum = 0;
+		for (int i = 0; i <= this.num; i++) {
+			sum += i;
+		}
+		return sum;
+	}
+}
+
+
+package com.javabasic.thread.callableandfuture;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class CallableAndFutureDemo {
+
+	public static void main(String[] args) {
+		MyCallable[] myCallables = { new MyCallable(11), new MyCallable(12), new MyCallable(13), new MyCallable(14),
+				new MyCallable(15), new MyCallable(16), new MyCallable(17), new MyCallable(18), new MyCallable(19),
+				new MyCallable(20), new MyCallable(21) };
+
+		ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(3);
+
+		for (MyCallable myCallable : myCallables) {
+			Future<Integer> future = newFixedThreadPool.submit(myCallable);
+
+			try {
+				System.out.println(future.get());
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
+		newFixedThreadPool.shutdown();
+	}
+}
+
+3. Garbage Collections
+
+- It is daemon thread run in background which collects unused object in the heap
+- It's up to the JVM how it manages even we manually call, we can just request JVM to collect object
+
+package com.javabasic.garbagecollections;
+
+public class GarbageCollectionsDemo {
+
+	int objId;
+
+	GarbageCollectionsDemo(int objId) {
+		this.objId = objId;
+		System.out.println(this + " Created " + this.objId);
+	}
+
+	public static void main(String[] args) {
+		for (int i = 0; i <= 5000000; i++) {
+			new GarbageCollectionsDemo(i);
+		}
+	}
+
+	//Once JVM memory is full it will start collecting unused object
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println(this + " Finalized " + this.objId);
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Inner Classes
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
