@@ -873,5 +873,202 @@ public class GarbageCollectionsDemo {
 
 ** Inner Classes
 
+1. Static Inner Class with Static Members
 
+package com.javabasic.staticinnerclass;
+
+public class Outer {
+
+	static void f1() {
+		System.out.println("Outer static method");
+	}
+
+	static class Inner {
+		static void f2() {
+			System.out.println("Inner static method");
+		}
+	}
+
+	public static void main(String[] args) {
+		Outer.f1();
+		Inner.f2();
+		Outer.Inner.f2();
+	}
+}
+
+
+2. Non Static Inner Class With Non-Static Members
+
+package com.javabasic.staticinnerclass;
+
+public class Outer {
+
+	static void f1() {
+		System.out.println("Outer static method");
+	}
+
+	static class Inner {
+
+		static void f2() {
+			System.out.println("Inner static method");
+		}
+
+		void f3() {
+			System.out.println("Inner non-static method");
+		}
+	}
+
+	public static void main(String[] args) {
+		Outer.f1();
+		Inner.f2();
+		Outer.Inner.f2();
+
+		Inner inner = new Inner();
+		inner.f3();
+
+		Outer.Inner inner2 = new Outer.Inner();
+		inner2.f3();
+	}
+}
+
+3. Non-Static Inner Classes
+
+- Java 16+ allowed static members inside non static inner class, previously it was not
+
+package com.javabasic.nonstaticinnerclass;
+
+public class Outer {
+
+	void f1() {
+		System.out.println("Non-Static Outer class with non-static method");
+	}
+
+	class Inner {
+
+		void f2() {
+			System.out.println("Non-Static Inner class with non-static method");
+		}
+
+		static void f3() {
+			System.out.println("Non-Static Inner class with static method");
+		}
+	}
+
+	public static void main(String[] args) {
+		Outer outer = new Outer();
+		outer.f1();
+		Outer.Inner inner = outer.new Inner();
+		inner.f2();
+		Outer.Inner.f3();
+	}
+}
+
+4. Accessing Outer member in Inner classes
+
+package com.javabasic.nonstaticinnerclass;
+
+public class AccesingOuterClassMember {
+
+	private static int x = 50;
+	private int y;
+
+	AccesingOuterClassMember(int y) {
+		this.y = y;
+	}
+
+	void f1() {
+		System.out.println("Non-Static Outer class with non-static method");
+	}
+
+	class Inner {
+
+		private int y;
+
+		Inner(int y) {
+			this.y = y;
+		}
+
+		void f2() {
+			System.out.println("Accesing outer static member " + AccesingOuterClassMember.x);
+			System.out.println("Accesing outer non-static member " + AccesingOuterClassMember.this.y);
+			System.out.println("Accesing inner non-static member " + this.y);
+		}
+
+		static void f3() {
+			System.out.println("Non-Static Inner class with static method");
+		}
+	}
+
+	public static void main(String[] args) {
+		AccesingOuterClassMember outer = new AccesingOuterClassMember(80);
+		outer.f1();
+		AccesingOuterClassMember.Inner inner = outer.new Inner(90);
+		inner.f2();
+		AccesingOuterClassMember.Inner.f3();
+	}
+}
+
+5. Local Inner Class
+
+- We can create non-static class only inside method, it will be accessible only within method
+
+package com.javabasic.localinnerclass;
+
+public class Outer {
+
+	void f1() {
+		System.out.println("Inside outer method");
+
+		class LocalInner {
+			void f2() {
+				System.out.println("Inside local inner class methods");
+			}
+		}
+		LocalInner inner = new LocalInner();
+		inner.f2();
+	}
+
+	public static void main(String[] args) {
+		Outer outer = new Outer();
+		outer.f1();
+	}
+}
+
+6. Anonymous Inner Class
+
+- Interface method we can provide implementation using anonymous implementation without creating another class
+
+package com.javabasic.anonymousinner;
+
+public interface Connection {
+
+	void createStatement();
+}
+
+
+package com.javabasic.anonymousinner;
+
+public class MyDriverManager {
+
+	static Connection newConnection() {
+		Connection connection = new Connection() {
+
+			@Override
+			public void createStatement() {
+				System.out.println("Inside create statement");
+			}
+		};
+		return connection;
+	}
+
+	public static void main(String[] args) {
+		Connection newConnection = MyDriverManager.newConnection();
+		newConnection.createStatement();
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** String Handling
+
+- String are bunch of characters
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
