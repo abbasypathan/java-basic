@@ -1542,3 +1542,172 @@ public class TwoDimensionalArray {
 - If equals() return false then hashCode() may or may not be same
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Collections With Generics
+
+Iterable (interface)
+│
+└── Collection (interface)
+    │
+    └── AbstractCollection (abstract class)
+        │
+        ├── List (interface)
+        │   │
+        │   ├── AbstractList (abstract class)
+        │   │   │
+        │   │   ├── ArrayList
+        │   │   ├── Vector
+        │   │   │    └── Stack
+        │   │   │
+        │   │   └── AbstractSequentialList (abstract class)
+        │   │         └── LinkedList
+        │   │
+        │   └── CopyOnWriteArrayList
+        │
+        ├── Set (interface)
+        │   │
+        │   ├── AbstractSet (abstract class)
+        │   │   │
+        │   │   ├── HashSet
+        │   │   │    └── LinkedHashSet
+        │   │   │
+        │   │   └── EnumSet (abstract class)
+        │   │
+        │   ├── SortedSet (interface)
+        │   │    └── NavigableSet (interface)
+        │   │          └── TreeSet
+        │   │
+        │   └── CopyOnWriteArraySet
+        │
+        └── Queue (interface)
+            │
+            ├── AbstractQueue (abstract class)
+            │    │
+            │    ├── PriorityQueue
+            │    └── ConcurrentLinkedQueue
+            │
+            └── Deque (interface)
+                 ├── ArrayDeque
+                 └── LinkedList
+
+
+
+Map Hierarchy (Separate from Collection)
+══════════════════════════════════════════════
+
+Map (interface)
+│
+└── AbstractMap (abstract class)
+    │
+    ├── HashMap
+    │    └── LinkedHashMap
+    │
+    ├── Hashtable
+    │    └── Properties
+    │
+    ├── SortedMap (interface)
+    │    └── NavigableMap (interface)
+    │          └── TreeMap
+    │
+    ├── WeakHashMap
+    ├── IdentityHashMap
+    ├── EnumMap
+    └── ConcurrentHashMap
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* List 
+
+- Insertion order maintained, allow duplicate, null
+
+1. ArrayList
+
+- ArrayList is a resizable dynamic array implementation of the List interface in Java.
+- Faster accessing/updating element as internally uses array
+- Slow while deleting element & adding new element in between other value needs shifting
+
+2. LinkedList
+
+- LinkedList is a doubly linked list implementation in Java.
+- It implements List, Deque, Queue
+- Faster adding/deleting
+- Slow in accessing/updating
+
+3. Vector
+
+- Vector is a legacy dynamic array class in Java.
+- It is thread safe all methods are synchronized
+- All operation are same like arraylist
+
+4. Stack
+
+- Stack is a LIFO (Last In First Out) data structure.
+- It extends Vector. It is thread safe all methods are synchronized
+- Methods are different for Stack push(),pop(),peek()
+- We can use List methods as well for Stack
+
+5. CopyOnWriteArrayList
+
+- CopyOnWriteArrayList is a thread-safe variant of ArrayList from concurrent package
+- Whenever modification happens, a NEW copy of array is created.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Set
+
+- Set is a Collection that stores only unique elements.
+- Internally uses hashCode() + equals() to check duplicate, if both match it will consider as duplicates
+- No insertion order guarantee
+
+1. HashSet
+
+- Allow 1 NULL value
+- Internally it uses HashMap, each data is stored as key in HashMap where value will be dummy object for all
+- First it calculate hash value if it present means it's duplicate value
+- To get value from HashSet we need to use Iterator
+
+2. LinkedHashSet
+
+- LinkedHashSet is a class in Java that combines HashSet + LinkedList behavior.
+- Insertion order maintained
+- Duplicates not allowed
+- Internally uses HashMap & Doubly Linked List for maintaining insertion order
+
+3. EnumSet 
+
+- EnumSet is a high-performance Set for enums, implemented using bit vectors (bit manipulation) internally.
+- Duplicates not allowed
+
+package com.javabasic.collections.set;
+
+import java.util.EnumSet;
+
+enum Day {
+	MON, TUE, WED, THU, FRI, SAT, SUN
+}
+
+public class EnumSetDemo {
+
+	public static void main(String[] args) {
+		EnumSet<Day> enumSet = EnumSet.of(Day.MON, Day.TUE, Day.WED, Day.THU, Day.FRI, Day.SAT, Day.SUN, Day.SUN);
+		EnumSet<Day> allOf = EnumSet.allOf(Day.class);
+		System.out.println(enumSet);
+		System.out.println(allOf);
+	}
+}
+
+4. TreeSet (Set -> SortedSet -> NavigableSet -> TreeSet)
+
+- TreeSet is a sorted Set implementation in Java.
+- Element stored in sorted order
+- Internally uses Red-Black Tree (each element as node)
+ 
+5. CopyOnWriteArraySet
+
+- Every modification (add/remove) creates a new copy of the underlying array
+- Internally uses CopyOnWriteArrayList
+- Whenever modification happens, a NEW copy of array is created.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Queue
+
+- 
+====================================================================================================================================================================================
