@@ -1613,6 +1613,106 @@ Map (interface)
     ├── IdentityHashMap
     ├── EnumMap
     └── ConcurrentHashMap
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Comparable & Comparator
+
+- Comparable is interface which has compareTo method which provides default sorting
+- Comparator is interface which has compare method which we can customise sorting
+
+package com.javabasic.sort;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class ComparableDemo implements Comparable<ComparableDemo> {
+
+	public int id;
+	public String name;
+
+	ComparableDemo(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public static void main(String[] args) {
+
+		Set<ComparableDemo> comparableDemos = new TreeSet<>();
+		comparableDemos.add(new ComparableDemo(100, "Abbas"));
+		comparableDemos.add(new ComparableDemo(400, "Pathan"));
+		comparableDemos.add(new ComparableDemo(300, "Rahul"));
+		comparableDemos.add(new ComparableDemo(600, "Kumar"));
+		comparableDemos.add(new ComparableDemo(500, "Someone"));
+
+		Iterator<ComparableDemo> iterator = comparableDemos.iterator();
+		while (iterator.hasNext()) {
+			ComparableDemo next = iterator.next();
+			System.out.println(next.id);
+		}
+	}
+
+	@Override
+	public int compareTo(ComparableDemo o) {
+		if (this.id < o.id) {
+			return -1;
+		} else if (this.id > o.id) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+}
+
+package com.javabasic.sort;
+
+import java.util.Comparator;
+
+public class MyComparator implements Comparator<ComparatorDemo> {
+
+	@Override
+	public int compare(ComparatorDemo o1, ComparatorDemo o2) {
+		String s1 = o1.name;
+		String s2 = o2.name;
+		return s1.compareTo(s2);
+	}
+
+}
+
+package com.javabasic.sort;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class ComparatorDemo {
+
+	public int id;
+	public String name;
+
+	ComparatorDemo(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public static void main(String[] args) {
+
+		Set<ComparatorDemo> comparableDemos = new TreeSet<>(new MyComparator());
+		comparableDemos.add(new ComparatorDemo(100, "Abbas"));
+		comparableDemos.add(new ComparatorDemo(400, "Pathan"));
+		comparableDemos.add(new ComparatorDemo(300, "Rahul"));
+		comparableDemos.add(new ComparatorDemo(600, "Kumar"));
+		comparableDemos.add(new ComparatorDemo(500, "Someone"));
+
+		Iterator<ComparatorDemo> iterator = comparableDemos.iterator();
+		while (iterator.hasNext()) {
+			ComparatorDemo next = iterator.next();
+			System.out.println(next.id + " " + next.name);
+		}
+	}
+}
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * List 
 
@@ -1648,6 +1748,10 @@ Map (interface)
 
 - CopyOnWriteArrayList is a thread-safe variant of ArrayList from concurrent package
 - Whenever modification happens, a NEW copy of array is created.
+
+6. ListIterator
+
+- We can iterate through list froward and backward
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * Set
