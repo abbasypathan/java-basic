@@ -1584,11 +1584,22 @@ Iterable (interface)
             ├── AbstractQueue (abstract class)
             │    │
             │    ├── PriorityQueue
-            │    └── ConcurrentLinkedQueue
             │
-            └── Deque (interface)
-                 ├── ArrayDeque
-                 └── LinkedList
+            ├── Deque (interface)
+            │    │
+            │    ├── ArrayDeque
+            │    └── LinkedList
+            │
+            ├── BlockingQueue (interface)
+            │    │
+            │    ├── ArrayBlockingQueue
+            │    ├── LinkedBlockingQueue
+            │    ├── PriorityBlockingQueue
+            │    ├── DelayQueue
+            │    ├── SynchronousQueue
+            │    └── LinkedTransferQueue
+            │
+            └── ConcurrentLinkedQueue
 
 
 
