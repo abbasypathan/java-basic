@@ -1935,7 +1935,29 @@ public class EnumSetDemo {
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-* Collections & Collections Classes
+* Arrays & Collections Classes
 
-- 
+1. Collections.sort()
+
+- Collections.sort(myList)
+- Collections.sort(myList, new MyComparator())
+- Collections.sort(myList, Comparator.reverseOrder())
+
+2. Collections.binarySearch(list, "D")
+
+- It returns index of element
+- If not found then return where that event should be inserted in negative index
+
+3. Collections.min(), Collections.max()
+
+- Returns min & max elements from list
+
+4. Arrays.sort()
+
+- Arrays.sort(arr)
+- Arrays.sort(arr, new MyComparator())
+
+5. Arrays.asList(array)
+
+- Convert array into List
 ====================================================================================================================================================================================
