@@ -1814,4 +1814,53 @@ public class EnumSetDemo {
 * Queue
 
 - 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Map
+
+- Stores data in key-value pairs
+- Calculates hash of key and stores data in the form of nodes
+
+1. HashMap
+
+- HashMap is a class in the Java Collections Framework used to store data in key-value pairs.
+
+2. LinkedHashMap
+
+- Same as HashMap but it stores order
+- Uses doubly linked list to store order
+
+3. Hashtable
+
+- Same as HashMap but it's synchronized
+- Null key & value not allowed
+
+4. Properties
+
+- Properties are a subclass of Hashtable used to store key-value pairs where both key and value are usually String.
+
+5. TreeMap (Map -> AbstractMap -> SortedMap -> NavigableMap -> TreeMap)
+
+- TreeMap is a class in Java used to store data in key-value pairs in sorted order of keys.
+- Internally uses red-black self balacing tree
+
+6. WeakHashMap
+
+- WeakHashMap is a special type of Map where keys are stored using Weak References. If a key object has no strong reference elsewhere, it becomes eligible for: Garbage Collection (GC) and the entry is automatically removed from the map.
+
+7. IdentityHashMap
+
+- IdentityHashMap is a special implementation of Map where keys are compared using == inside of equals
+
+8. EnumMap
+
+- EnumMap is a special Map implementation designed specifically for Enum keys.
+- Internally uses Array not hashing as key are fixed constant enums.
+
+9. ConcurrentHashMap
+
+- ConcurrentHashMap is a thread-safe version of HashMap designed for high concurrency.
+- Difference between Hashtable ConcurrentHashMap  is Hashtable lock whole map but ConcurrentHashMap create segments and Multiple threads could work on different segments simultaneously.
+- Segments means it creates sub part of Map and add lock on segment level so multiple thread can access different segment if another thread wants to access same segment which is lock by another thread then needs to wait
 ====================================================================================================================================================================================
