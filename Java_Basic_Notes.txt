@@ -1583,7 +1583,7 @@ Iterable (interface)
             │
             ├── AbstractQueue (abstract class)
             │    │
-            │    ├── PriorityQueue
+            │    └── PriorityQueue
             │
             ├── Deque (interface)
             │    │
@@ -1824,8 +1824,66 @@ public class EnumSetDemo {
 
 * Queue
 
-- 
+- A Queue is a linear data structure used to store elements in FIFO order (First In First Out).
 
+1. PriorityQueue
+
+- PriorityQueue is a queue where elements are processed based on priority, not insertion order.
+- Null not allowed & uses dynamic array + binary heap
+- Insertion order not preserved
+
+2. ArrayDeque
+
+- Double Ended Queue, allow insertion/deletion at both end
+- Internally uses Resizable Circular Array (Front/rear move circularly)
+
+3. LinkedList
+
+- It implements multiple interface such as List, Queue, Duque
+- It can be used as all 3 listed above based on requirements
+- Internally uses doubly linked list
+
+4. ArrayBlockingQueue
+
+- Thread-safe, bounded, blocking queue
+- Implemented using a: Fixed-size Circular Array
+
+5. LinkedBlockingQueue
+
+- Same as ArrayBlockingQueue but this uses singly inked list
+
+6. PriorityBlockingQueue
+
+- Thread-safe + blocking version of PriorityQueue
+- Binary Heap + Dynamic Array
+
+7. DelayQueue
+
+- Thread-safe BlockingQueue where elements become available only after a delay expires
+- Internally uses PriorityQueue
+- To implement DelayQueue we need to implements Delayed interface
+
+8. SynchronousQueue
+
+- Queue has ZERO capacity
+- It cannot store elements, every insert must wait for a remove, every remove must wait for an insert
+- It doesn't store element just help to pass from one consumer to another
+- executor framework uses this
+
+9. LinkedTransferQueue
+
+- Unbounded, thread-safe, high-performance BlockingQueue
+- It is designed for direct handoff + queueing hybrid behavior.
+- It combines features of:
+	Queue (stores elements)
+	SynchronousQueue (direct handoff)
+	BlockingQueue (waiting behavior)
+
+10. ConcurrentLinkedQueue
+
+- Thread-safe, non-blocking, unbounded queue
+- It is designed for high-concurrency, low-latency FIFO operations.
+- Singly Linked List
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 * Map
@@ -1874,4 +1932,10 @@ public class EnumSetDemo {
 - ConcurrentHashMap is a thread-safe version of HashMap designed for high concurrency.
 - Difference between Hashtable ConcurrentHashMap  is Hashtable lock whole map but ConcurrentHashMap create segments and Multiple threads could work on different segments simultaneously.
 - Segments means it creates sub part of Map and add lock on segment level so multiple thread can access different segment if another thread wants to access same segment which is lock by another thread then needs to wait
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Collections & Collections Classes
+
+- 
 ====================================================================================================================================================================================
