@@ -1480,6 +1480,7 @@ public class ScannerDemo {
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ** Arrays
+
 - Group of elements of homogenous type(same data type)
 
 1. Create Array & Assign Value
@@ -1960,4 +1961,80 @@ public class EnumSetDemo {
 5. Arrays.asList(array)
 
 - Convert array into List
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Generics
+
+1. Generic Classes
+
+- Without generic type safety and type casting is an issue
+
+class MyGenericClass<T>{
+	add(T obj){}
+	T get(int index){}
+}
+
+2. Restricting generic type parameters on class
+
+- It will allow only those object which are extended by Interface or Classes
+- We can use multiple Interface or Classes with & operator
+
+class  MyGenericClass(T extends Interface/Class){
+	add(T obj){}
+	T get(int index){}
+}
+
+class  MyGenericClass(T extends Interface/Class & Interface/Class){
+	add(T obj){}
+	T get(int index){}
+}
+
+3. Generic method parameter & wild card
+
+- ? is the wild card symbol which just allow null value
+- We can use extends with Interface or Classes then will allow specific type object
+
+public void method1(ArrayList<?> list) {
+		list.add(null);
+		// list.add("Abbas"); Type is not specified, it will allow only null value
+}
+
+public void method2(ArrayList<? extends Thread> list) {
+	list.add(null);
+	// list.add("Abbas"); String not extends Thread, Class which extends by Thread only allowed
+}
+
+public void method3(ArrayList<? super Object> list) {
+	list.add(null);
+	list.add("Abbas");
+}
+
+4. Method level generic type parameters
+
+- Restricting method argument which method will accept defined type only
+- If we are using multiple after & we need to declare Interfaces only, classes not allowed 
+
+public <T> void method1(T obj) {
+	System.out.println(obj.getClass().getName());
+}
+
+public <T extends Runnable> void method2(T obj) {
+	System.out.println(obj.getClass().getName());
+}
+
+public <T extends Thread & Runnable> void method3(T obj) {
+	System.out.println(obj.getClass().getName());
+}
+
+5. Type Erasure
+
+- Compiler check data type at compile time and at runtime it will be removed
+- List<String> : <String> are called as type erasure
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Concurrent Collections
+
+- 
 ====================================================================================================================================================================================
