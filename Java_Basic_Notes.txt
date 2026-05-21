@@ -2036,5 +2036,37 @@ public <T extends Thread & Runnable> void method3(T obj) {
 
 ** Concurrent Collections
 
+1. Traditional Collection Problem
+
+- We can't modify collection when it's in use
+
+2. CopyOnWriteArrayList
+
+- Create new copy of list for concurrent operation and once all operation completed it's merged results
+
+3. CopyOnWriteArraySet
+
+- Same working as CopyOnWriteArrayList but this is for Set
+
+4. ConcurrentHashMap
+
+- Same working as CopyOnWriteArrayList but this is for hash map
+
+5. BlockingQueue
+
+- It will not store elements it work as middle wear for producer and consumer 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Enum
+
+- All elements are by default public static final
+- Each enum is reference of object which can have methods, variables, constructor
+- By default enum classes extends Enum class which is provided by java hence we can't extends any other classes
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+** Java 8 Features
+
 - 
 ====================================================================================================================================================================================
