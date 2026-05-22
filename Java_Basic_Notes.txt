@@ -2068,5 +2068,41 @@ public <T extends Thread & Runnable> void method3(T obj) {
 
 ** Java 8 Features
 
+1. Lambda Expression
+- Functional programing, anonymous function
+
+2. Anonymous Class
+- We can provide implementation direct to the function interface
+
+3. Functional Interface
+- Interface which is having only one abstract method are called functional interface
+- We can have default and static methods
+
+4. Default Methods
+- By default default methods are public and can be declared in interface only
+
+5. Diamond Problem
+- If class implements 2 interface and it has same default method then class needs to provide implementation to avoid diamond problem
+
+6. Predicate
+- It is functional interface provided by java which is having test(T t) method
+- Which accepts single arguments and returns boolean value
+- We can join multiple predicates using and(), or() methods
+- negate() is act as opposite of whatever logic is write in test() method
+
+7. Function
+- Similar to Predicate but Function can return any type
+- It is function interface with apply(T t) method which can return type we specify
+
+Function<String,Integer> ...
+- String is method argument type & Integer is return type of apply() method
+
+8. Method Reference (::)
+- :: uses for method reference 
+- We can set method implementation to another method using ::
+- Both method should have same signature (same method parameter & return type)
+
+9. Stream APIs
 - 
+
 ====================================================================================================================================================================================
