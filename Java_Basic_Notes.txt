@@ -2102,9 +2102,27 @@ Function<String,Integer> ...
 - We can set method implementation to another method using ::
 - Both method should have same signature (same method parameter & return type)
 
-10. Constructor Refrencing
-- 
+10. Constructor Referencing
+- ConstructorNameClas::new
+- Which will return instance of ConstructorNameClas with same parameters of method & constructor
 
-10. Stream APIs
+11. Stream APIs
+- Stream is interface in java.util.stream.Stream stream()
+
+A. Configuration
+   a. Filtering
+   - public Stream filter(Predicate<T> p)
+   B. Map
+   - public Stream map(Function<T,T> f)
+B. Processing
+- collect(), count(), sorted(), min(), max()
+
+12. Optional
+- To avoid NullPointer exception
+- If data is null or empty Optional will be empty
+
+====================================================================================================================================================================================
+** JVM Architecture
+
 - 
 ====================================================================================================================================================================================
