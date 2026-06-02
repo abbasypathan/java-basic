@@ -2395,4 +2395,128 @@ B. Processing
 
 ** Annotations
 
+- Annotations are metadata added to Java code to provide information.
+
+1. Compile Time
+2. Build Time
+3. Runtime
+
+@Deprecated : It mark method/class/variable as deprecated and can be removed in upcoming version
+@Override : We can annotate parent method which we have implemented in child class. It also help to ensure it's matching same signature from parent
+@SuppressWarnings : If we want to suppress warning which are shown while compiling our code
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* Create Own Annotation
+
+
+@Retention(RetentionPolicy.RUNTIME)   //Defines how long annotation should be available.
+@Target(ElementType.METHOD)          // Defines where annotation can be used.
+public @interface MyAnnotation {
+
+}
+
+====================================================================================================================================================================================
+
+** Reflection API
+
+- Reflection API allows Java program to inspect and manipulate:
+	Classes
+	Methods
+	Fields
+	Constructors
+	Annotations
+at runtime.
+
+- Class is the main class in reflection API
+
+package com.javabasic.reflection;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+public class LoadClassDemo {
+
+	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
+		Class<?> myClass = Class.forName(Calculator.class.getName());
+		System.out.println(myClass);
+
+		Constructor<?>[] constructors = myClass.getConstructors();
+		System.out.println(Arrays.toString(constructors));
+
+		Method[] methods = myClass.getMethods();
+		System.out.println(Arrays.toString(methods));
+
+		// Create new object of Calculator using default constructor
+		Constructor<?> constructors1 = myClass.getConstructor(null);
+		System.out.println(constructors1.newInstance(null));
+
+		// Create new object of Calculator using parameterized constructor
+		Constructor<?> constructors2 = myClass.getConstructor(double.class, double.class);
+		Object newInstance = constructors2.newInstance(5, 10);
+		System.out.println(newInstance);
+
+		Method meth3 = myClass.getMethod("setNum1", double.class);
+		meth3.invoke(newInstance, 20);
+
+		Method meth4 = myClass.getMethod("setNum2", double.class);
+		meth4.invoke(newInstance, 50);
+
+		Field declaredField = myClass.getDeclaredField("num1");
+		declaredField.setAccessible(true);
+
+		declaredField.set(newInstance, 44);
+
+		Method meth = myClass.getMethod("getNum1", null);
+		System.out.println(meth.invoke(newInstance, null));
+
+		Method meth2 = myClass.getMethod("getNum2", null);
+		System.out.println(meth2.invoke(newInstance, null));
+
+		Method meth5 = myClass.getMethod("sum", int.class, int.class);
+		System.out.println(meth5.invoke(newInstance, 23, 34));
+
+		Annotation[] annotations = myClass.getAnnotations();
+		System.out.println(Arrays.toString(annotations));
+
+		MyAnnotation annotation = (MyAnnotation) annotations[0];
+		System.out.println(annotation.value1());
+		System.out.println(annotation.value2());
+	}
+}
+
+* Different way to create object
+
+package com.javabasic.reflection;
+
+import java.lang.reflect.InvocationTargetException;
+import java.text.DateFormat;
+
+public class DiffrentWayOfObjectCreation {
+
+	@SuppressWarnings("deprecation")
+	public static void main(String[] args) throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
+			CloneNotSupportedException {
+
+		Calculator c1 = new Calculator();
+
+		Class.forName(Calculator.class.getName()).newInstance();// Deprecated
+
+		Calculator c3 = Calculator.class.getConstructor().newInstance();
+
+		Calculator c4 = (Calculator) c1.clone();
+
+		DateFormat dateFormat = DateFormat.getInstance();
+	}
+}
+
+====================================================================================================================================================================================
+
+** Regular Expression
+
 - 
+====================================================================================================================================================================================
