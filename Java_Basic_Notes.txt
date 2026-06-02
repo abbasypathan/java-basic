@@ -2487,6 +2487,7 @@ public class LoadClassDemo {
 		System.out.println(annotation.value2());
 	}
 }
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 * Different way to create object
 
@@ -2518,5 +2519,29 @@ public class DiffrentWayOfObjectCreation {
 
 ** Regular Expression
 
-- 
+- java.util.regex.Matcher & java.util.regex.Pattern
+
+- [xyz] : matching char with x or y or z
+- [^xyz] : other than xyz
+- [a-z] : char from small a to z
+- [A-Z] : char from capital A to Z
+- [a-zA-Z] : including both
+- [0-9] : any number
+- [a-zA-Z0-9] : all char & numbers
+
+- \s : space 
+- \d : any digits from 0 to 9 [0-9]
+- \w : matches any alpha or numbers [a-zA-Z0-9]
+- . : everything including special char
+- \S : any char except the space char
+- \D : any char except digits [0-9]
+- \W : any char except alpha or numbers [a-zA-Z0-9]
+
+- X- : x can occur once
+- X? : 0 or 1
+- X+ : 1 or more than 1
+- X* : 0 or more 
+
+- ^ : Start of the regex (^[] - should be outside the box)
+- $ : End of the regex
 ====================================================================================================================================================================================
