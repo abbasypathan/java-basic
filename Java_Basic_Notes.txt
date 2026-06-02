@@ -2124,5 +2124,275 @@ B. Processing
 ====================================================================================================================================================================================
 ** JVM Architecture
 
-- 
+1. Hardware Based
+- Share underline hardware, example VM ware 
+
+2. Software Based
+- JVM
+
++------------------------------------------------------+
+|                   Java Application                   |
+|            (Spring Boot / Core Java App)             |
++-------------------------+----------------------------+
+                          |
+                          v
++------------------------------------------------------+
+|                     Java Compiler                    |
+|                         javac                        |
+|                                                      |
+| Converts .java source code into .class bytecode      |
++-------------------------+----------------------------+
+                          |
+                          v
++------------------------------------------------------+
+|                     Class Files                      |
+|                    (.class files)                    |
+|                  Bytecode Generated                  |
++-------------------------+----------------------------+
+                          |
+                          v
++======================================================+
+|                     JVM (Java Virtual Machine)       |
++======================================================+
+
+    +----------------------------------------------+
+    |                Class Loader                  |
+    |----------------------------------------------|
+    | • Loads class files into memory              |
+    | • Bootstrap ClassLoader                      |
+    | • Extension/Platform ClassLoader             |
+    | • Application ClassLoader                    |
+    +-------------------+--------------------------+
+                        |
+                        v
+    +----------------------------------------------+
+    |              Bytecode Verifier               |
+    |----------------------------------------------|
+    | Checks bytecode validity and security        |
+    | • Invalid memory access check                |
+    | • Stack overflow check                       |
+    | • Type safety check                          |
+    +-------------------+--------------------------+
+                        |
+                        v
+    +----------------------------------------------+
+    |               Runtime Data Area              |
+    +----------------------------------------------+
+
+        +-------------------------------+
+        |           Heap Memory         |
+        |-------------------------------|
+        | Objects & instance variables  |
+        +-------------------------------+
+
+        +-------------------------------+
+        |            Stack              |
+        |-------------------------------|
+        | Method calls                  |
+        | Local variables               |
+        | Stack frames                  |
+        +-------------------------------+
+
+        +-------------------------------+
+        |        Method Area            |
+        |-------------------------------|
+        | Class metadata                |
+        | Static variables              |
+        | Runtime constant pool         |
+        +-------------------------------+
+
+        +-------------------------------+
+        |              PC Register      |
+        |-------------------------------|
+        | Current executing instruction |
+        +-------------------------------+
+
+        +-------------------------------+
+        |         Native Method Stack   |
+        |-------------------------------|
+        | Native C/C++ method execution |
+        +-------------------------------+
+                        |
+                        v
+    +----------------------------------------------+
+    |            Execution Engine                  |
+    |----------------------------------------------|
+    | • Interpreter                                |
+    | • JIT Compiler                               |
+    | • Garbage Collector                          |
+    +-------------------+--------------------------+
+                        |
+                        v
+    +----------------------------------------------+
+    |              Native Method Interface (JNI)   |
+    |----------------------------------------------|
+    | Connects Java with Native Libraries          |
+    +-------------------+--------------------------+
+                        |
+                        v
+    +----------------------------------------------+
+    |              Native Method Libraries         |
+    |----------------------------------------------|
+    | OS Libraries (.dll / .so / .dylib)           |
+    +----------------------------------------------+
+                          |
+                          v
++------------------------------------------------------+
+|                Operating System                      |
+|           Windows / Linux / macOS                    |
++------------------------------------------------------+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Class Loader
+
+- .class file get loaded into memory 1 time only
+- Using same class multiple object can be created
+
+
+
+                    JVM STARTS
+                         |
+                         v
++--------------------------------------------------+
+|                  Class Loader                    |
++--------------------------------------------------+
+|                                                  |
+|  1. Bootstrap ClassLoader                        |
+|--------------------------------------------------|
+|  • Loads core Java classes                       |
+|  • Loads rt.jar / java.lang.*                    |
+|  • Written in Native Code                        |
+|  • /jre/lib/*.jar                                |
++------------------------+-------------------------+
+                         |
+                         v
++--------------------------------------------------+
+|          2.  Platform ClassLoader                |
+|        (Extension ClassLoader in older JDK)      |
++--------------------------------------------------+
+|                                                  |
+|  • Loads JDK extension libraries                 |
+|  • Loads classes from jdk/modules                |
+|  • ext/*.jar                                     |
++------------------------+-------------------------+
+                         |
+                         v
++--------------------------------------------------+
+|          3. Application ClassLoader              |
++--------------------------------------------------+
+|                                                  |
+|  • Loads application classes                     |
+|  • Loads classes from classpath                  |
+|  • Example: Spring Boot classes                  |
+|                                                  |
++------------------------+-------------------------+
+                         |
+                         v
++--------------------------------------------------+
+|               Loading Phase                      |
++--------------------------------------------------+
+|                                                  |
+|  JVM reads .class bytecode into memory           |
+|                                                  |
++------------------------+-------------------------+
+                         |
+                         v
++--------------------------------------------------+
+|                Linking Phase                     |
++--------------------------------------------------+
+|                                                  |
+|  +--------------------------------------------+  |
+|  | Verification                               |  |
+|  |--------------------------------------------|  |
+|  | Checks bytecode validity & security        |  |
+|  +--------------------------------------------+  |
+|                                                  |
+|  +--------------------------------------------+  |
+|  | Preparation                                |  |
+|  |--------------------------------------------|  |
+|  | Allocates memory for static variables      |  |
+|  +--------------------------------------------+  |
+|                                                  |
+|  +--------------------------------------------+  |
+|  | Resolution                                 |  |
+|  |--------------------------------------------|  |
+|  | Replaces symbolic refs with actual refs    |  |
+|  +--------------------------------------------+  |
+|                                                  |
++------------------------+-------------------------+
+                         |
+                         v
++--------------------------------------------------+
+|              Initialization Phase                |
++--------------------------------------------------+
+|                                                  |
+|  • Static variables initialized                  |
+|  • Static blocks executed                        |
+|                                                  |
++------------------------+-------------------------+
+                         |
+                         v
++--------------------------------------------------+
+|             Class Ready For Execution            |
++--------------------------------------------------+
+
+1. Method Area
+
+- Stores class-level data.
+- Contains:
+	Class metadata
+	Static variables
+	Method definitions
+	Runtime constant pool
+
+2. Stack Memory
+
+- Stores thread-specific execution data.
+- Contains:
+	Method calls
+	Local variables
+	References
+- Each thread gets separate stack.
+
+3. Heap Area
+
+- Stores objects and instance variables.
+
+4. PC Register Area
+
+- PC = Program Counter.
+- Stores address of current executing instruction for each thread.
+- Each thread has separate PC register.
+
+5. Native Method Area Stack 
+
+- Native method execution uses Native Method Stack.
+
 ====================================================================================================================================================================================
+
+** Internationalization or I18N
+
+- Designing an application so it can support multiple languages and regions without changing code.
+
+1. Locale
+
+- Country_Language
+
+2. NumberFormat
+
+- Formatting number as per Locale
+
+3. DateFormat
+
+- Formatting date as per Locale
+
+4. SimpleDateFormat
+
+- Converting one date into another date format as per requirement
+
+====================================================================================================================================================================================
+
+** Annotations
+
+- 
