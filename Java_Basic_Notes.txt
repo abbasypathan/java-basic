@@ -2545,3 +2545,56 @@ public class DiffrentWayOfObjectCreation {
 - ^ : Start of the regex (^[] - should be outside the box)
 - $ : End of the regex
 ====================================================================================================================================================================================
+
+** Java 9 Features
+
+1. Private Methods in Interfaces
+2. Try-With-Resources Enhancement
+3. Collection Factory Methods (List.of, Set.of, Map.of)/Immutable Collections
+4. Stream API Enhancements (takeWhile, dropWhile, ofNullable)
+5. JShell
+6. Module System (JPMS)
+7. HTTP/2 Client API
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Private Methods in Interfaces 
+- We can write static & non-static methods in interface
+
+2. Try-With-Resources Enhancement
+- We can declared resource outsider try block and just pass the resource object
+
+3. Collection Factory Methods/ Immutable Collections
+- .of methods provides immutable collections where we can't add any value later on
+
+4. Stream API Enhancements (takeWhile, dropWhile, ofNullable)
+- takeWhile() : Returns element while conditions is true
+- dropWhile() : Skips elements while the condition is true
+- ofNullable() : Creates a stream with one element if non-null, otherwise an empty stream
+
+5. JShell
+- Interactive Read-Eval-Print Loop.
+- Allows executing Java code without creating a class or main() method.
+
+6. Module System (JPMS - Java Platform Module System)
+- Helps organize large applications into modules.
+- Improves maintainability, security, and performance.
+- Cyclic dependency not possible it will give compile time error
+- We can create one module which will access multiple module and export as single aggregator module
+
+module com.example.app {
+    requires java.sql;
+    requires static xyz; // Requires at compile time only
+    exports com.example.service;
+    exports transitive xyz; // It can be consumed by third party application as well
+    exports xyz to module_name; //Restrict to given module only no other module can access
+}
+
+7. HTTP/2 Client API
+- Added to call http URL but later in java 11 got the standard one (More about this found below under Java 11 features)
+====================================================================================================================================================================================
+
+** Java 10 Features
+
+- 
+====================================================================================================================================================================================
