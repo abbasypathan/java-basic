@@ -2565,7 +2565,7 @@ public class DiffrentWayOfObjectCreation {
 - We can declared resource outsider try block and just pass the resource object
 
 3. Collection Factory Methods/ Immutable Collections
-- .of methods provides immutable collections where we can't add any value later on
+- .of() methods provides immutable collections where we can't add any value later on
 
 4. Stream API Enhancements (takeWhile, dropWhile, ofNullable)
 - takeWhile() : Returns element while conditions is true
@@ -2596,5 +2596,28 @@ module com.example.app {
 
 ** Java 10 Features
 
-- 
+1. var keyword
+2. Collectors API changes
+3. Immutable Collection (List.copyOf(), Set.copyOf(), Map.copyOf())
+4. JVM & Garbage Collector Improvements
+5. Root Certificates
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. var keyword
+- Can't use at class level, can't use for lambda expression, can't assign null value
+- While using it should no about type
+
+2. Collectors API changes
+- Added new method to get unmodified list/set/map 
+- Collectors.toUnmodifiableList()
+
+3. Immutable Collection (List.copyOf(), Set.copyOf(), Map.copyOf())
+- Copy elements from given collections and create immutable new collections
+
+4. JVM & Garbage Collector Improvements
+- JVM using shared classes between multiple applications
+- GC are getting executed in parallel
+
+5. Root Certificates
+- Java 10 included a default set of root CA certificates.
 ====================================================================================================================================================================================
