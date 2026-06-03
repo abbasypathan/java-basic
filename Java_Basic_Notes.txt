@@ -2621,3 +2621,40 @@ module com.example.app {
 5. Root Certificates
 - Java 10 included a default set of root CA certificates.
 ====================================================================================================================================================================================
+
+** Java 11 Features
+
+1. String API Update
+2. File API Update
+3. isEmpty on Optional
+4. var in Lambda Parameters
+5. Single File Source-Code Execution
+6. Predicate.not()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. String API Update
+- few more methods added in String class
+- isBlank() : Checks whether a string is empty or contains only whitespace.
+- strip(),stripLeading(),stripLeading() : Removes leading and trailing whitespace using Unicode standards.
+- repeat() : repeat the number of times string value
+- lines() : Converts a multiline string into a stream.
+
+2. File API Update
+- Easy way to read and write file
+
+Files.writeString(Path.of("data.txt"), "Hello Java 11");
+		
+String data = Files.readString(Path.of("data.txt"));
+
+3. isEmpty on Optional
+
+4. var in Lambda Parameters
+- We can mention var in lambda expressions method parameters
+- (var a, var b) -> a + b
+
+5. Single File Source-Code Execution
+- We can directly executes .java class without creating .class file
+
+6. Predicate.not()
+- not() method added to the predicate to check which is not matching conditions
+====================================================================================================================================================================================
