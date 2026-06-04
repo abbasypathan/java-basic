@@ -2658,3 +2658,52 @@ String data = Files.readString(Path.of("data.txt"));
 6. Predicate.not()
 - not() method added to the predicate to check which is not matching conditions
 ====================================================================================================================================================================================
+
+** Java 12 Features
+
+1. Switch Expressions (Preview)
+2. String methods indent(),transform()
+3. NumberFormat introduced comapctNumberInstance()
+4. Stream API - teeing()
+5. Unicode update
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Switch Expressions (Preview)
+- Introduced as preview
+- We can get value returned from statement 
+
+case 1 -> {
+	System.out.println("Case1");
+	yield "Monday";
+}
+
+- If we have multiple statement then have to use yield to return value
+- If single statement no need to use {} and yield
+
+2. String methods indent(),transform()
+- indent(n) : add number of spaces starting of the string, if n is negative it will move spaces if available
+- transform() : It will accept function which can be performed baed on Function logic on selected string
+
+3. NumberFormat introduced comapctNumberInstance()
+- format the number based on style, by default style will be SHORT
+- example 1000 -> 1k, depending on Locale
+
+4. Stream API - teeing()
+- Collectors method teeing() added which takes first 2 collectors operation and 3rd as merging result of first 2
+- ResultOfTeeing result = Stream.of(2, 3, 10, 20, 45, 6, 70).collect(Collectors.teeing(Collectors.counting(),
+				Collectors.filtering(n -> n > 10, Collectors.toList()), ResultOfTeeing::new));
+		System.out.println(result);
+
+5. Unicode update
+- More unicode support added (chess symbol)
+
+System.out.println("\u265A");// ♚
+System.out.println("\u265B");// ♛
+System.out.println("\u265C");// ♜
+
+System.out.println("\u2654");// ♔
+System.out.println("\u2655");// ♕
+System.out.println("\u2656");// ♖
+
+====================================================================================================================================================================================
