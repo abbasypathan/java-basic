@@ -2757,7 +2757,7 @@ public class HttpClientDemo {
 
 ** Java 13 & 14 Features
 
-1. String content block
+1. String content block/ Text Block
 2. Switch expression
 3. Instanceof pattern matching
 4. Record
@@ -2765,7 +2765,7 @@ public class HttpClientDemo {
 5. Records
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-1. String content block
+1. String content block/ Text Block
 - We can write string using """ """; 
 - Multiple lines with formatted it will be printed as it
 
@@ -2786,9 +2786,35 @@ public class HttpClientDemo {
 
 ** Java 15 Features
 
-1. 
-
+1. Text Block
+2. Sealed Classes
+3. Enhanced in Record Preview
+4. Pattern Matching Preview
+5. EdDSA
+6. Hidden Classes
+7. GC Improvement
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-1. 
-- 
+
+1. Text Block
+- Standar in java 15
+
+2. Sealed Classes
+- Allows you to restrict which classes can extend or implement a type.
+
+public sealed class Shape
+    permits Circle, Rectangle {
+}
+
+- All permitted subclasses must belong to the same module as the sealed class.
+- Every permitted subclass must explicitly extend the sealed class.
+- Every permitted subclass must define a modifier: final, sealed, or non-sealed.
+- Reflection: The isSealed method returns true if the given class or interface is sealed.
+- If we add non-sealed then any class can extends marked class
+- Same we can do with interface as well
+
+3. Enhanced in Record Preview
+- Still preview features but some enhancement done in java 15
+- We can use sealed with records
+- We can use annotation on constructor parameters of record
+- We can use record within local method
 ====================================================================================================================================================================================
