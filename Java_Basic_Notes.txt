@@ -2818,3 +2818,42 @@ public sealed class Shape
 - We can use annotation on constructor parameters of record
 - We can use record within local method
 ====================================================================================================================================================================================
+
+** Java 16 Features
+
+1. Stram toList()
+2. Record (finalized)
+3. Time format enhancement
+4. Sealed classes enhancement (2nd preview)
+5. Default methods with proxy object
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Stram toList()
+- Instead of Collectors.toList() we can directly call the toList() method
+- ids.stream().map(Integer::parseInt).toList();
+
+2. Record (finalized)
+- We can use record inside inner classes
+
+3. Time format enhancement
+- 'B' will print full name of time
+
+package com.javabasic.java16features.datetimeformat;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class DateTimeFormatDemo {
+
+	public static void main(String[] args) {
+		LocalTime localTime = LocalTime.parse("10:23:23.9576");
+		DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern("h B");
+		System.out.println(ofPattern.format(localTime));//10 in the morning
+	}
+}
+
+4. Sealed classes enhancement (2nd preview)
+
+5. Default methods with proxy object
+- We can call default method without providing implementation class and creating object, we can call using proxy object
+====================================================================================================================================================================================
