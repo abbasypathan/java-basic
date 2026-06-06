@@ -2755,7 +2755,40 @@ public class HttpClientDemo {
 
 ====================================================================================================================================================================================
 
-** Java 13 Features
+** Java 13 & 14 Features
 
+1. String content block
+2. Switch expression
+3. Instanceof pattern matching
+4. Record
+4. Helpful null pointer
+5. Records
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. String content block
+- We can write string using """ """; 
+- Multiple lines with formatted it will be printed as it
+
+2. Switch expression
+- preview introduce in java 12 & yield added to return results
+
+3. Instanceof pattern matching
+- We can declared variable directly while checking instance type
+- if (obj instanceof String str2) {}
+
+4. Record
+- by using record we can declared class it will auto generate constructor, getter , toString, hashCode etc
+- record Employee(String name, int sal){}
+- records are by default final including filed as well, no one can extends them or they also can't be extend another class
+- Can't add additional filed as well. We can add static fields
+- We can add default constructor but we need ti initialize them in same 
+====================================================================================================================================================================================
+
+** Java 15 Features
+
+1. 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. 
 - 
 ====================================================================================================================================================================================

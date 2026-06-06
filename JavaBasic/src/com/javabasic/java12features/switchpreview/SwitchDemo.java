@@ -4,7 +4,7 @@ public class SwitchDemo {
 
 	public static void main(String[] args) {
 
-		//previously
+		// previously
 		int key = 3;
 		switch (key) {
 		case 1: {
@@ -24,7 +24,25 @@ public class SwitchDemo {
 		}
 		}
 
-		//After java 12
+		// After java 12
+		String result1 = switch (key) {
+		case 1: {
+			System.out.println("Case1");
+			yield "Monday";
+		}
+		case 2: {
+			System.out.println("Case2");
+			yield "Tuesday";
+		}
+		case 3: {
+			System.out.println("Case3");
+			yield "Wednesday";
+		}
+		default: {
+			yield "Other";
+		}
+		};
+		System.out.println(result1);
 		String result = switch (key) {
 		case 1 -> {
 			System.out.println("Case1");
