@@ -2853,6 +2853,7 @@ public class DateTimeFormatDemo {
 }
 
 4. Sealed classes enhancement (2nd preview)
+- We can restrict particular classes to only that permitted class only extend sealed class/Interface 
 
 5. Default methods with proxy object
 - We can call default method without providing implementation class and creating object, we can call using proxy object
