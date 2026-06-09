@@ -1,0 +1,21 @@
+package com.javabasic.java17features.deserializationfilter;
+
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	int id;
+	String name;
+	double salary;
+	transient int ssn;
+
+	Employee(int id, String name, double salary, int ssn) {
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.ssn = ssn;
+	}
+
+}

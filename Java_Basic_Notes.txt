@@ -2858,3 +2858,26 @@ public class DateTimeFormatDemo {
 5. Default methods with proxy object
 - We can call default method without providing implementation class and creating object, we can call using proxy object
 ====================================================================================================================================================================================
+
+** Java 17 Features
+
+1. Sealed classes
+2. Enhanced Pseudo-Random Number Generators
+3. Pattern Matching for switch (Preview)
+4. Deserialization Filters in Java
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Sealed classes
+- Sealed classes allow you to restrict which classes can extend a class or implement an interface.
+
+2. Enhanced Pseudo-Random Number Generators
+- New interfaces and implementations for random number generation added.
+
+3. Pattern Matching for switch (Preview)
+- We can pass any type in switch selector
+- We can have case for null value as well
+
+4. Deserialization Filters in Java
+- We can filter what should be deserialize and what not by specifying class packages
+- We can set only 1 filter to the deserialize object
+====================================================================================================================================================================================
