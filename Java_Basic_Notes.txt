@@ -2876,8 +2876,49 @@ public class DateTimeFormatDemo {
 3. Pattern Matching for switch (Preview)
 - We can pass any type in switch selector
 - We can have case for null value as well
+- Before JDK 21 you can use && instead of when (case String s when s.length() > 5 -> System.out.println(s);)
 
 4. Deserialization Filters in Java
 - We can filter what should be deserialize and what not by specifying class packages
 - We can set only 1 filter to the deserialize object
+====================================================================================================================================================================================
+
+** Java 18 Features
+
+1. Pattern Matching for switch (2nd Preview)
+2. Internet-Address Resolution SPI
+3. Simple Web Server
+4. UTF-8 by Default
+5. Deprecate Finalization for Removal
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Pattern Matching for switch (2nd Preview)
+- Enhancement over first preview added support to check dominance & exhaustive switch
+
+A. Dominance Checking
+- A pattern is said to dominate another pattern if it matches all values that the later pattern could match.
+- Example CharSequence will dominate on String
+
+B Exhaustive Switch
+- Java wants to ensure that every possible input is handled.
+- If we have Object as type in switch then it will expect all classes to be included in case
+- We can overcome from this rule using default case
+
+2. Internet-Address Resolution SPI
+- We can get ip address by providing domain name to the InetAddress class
+- InetAddress address = InetAddress.getByName("google.com");//google.com/142.250.205.206
+
+3. Simple Web Server
+- Java 18 introduced a lightweight web server for development purposes.
+- We just need to select any directory which is having index.html file which can be used as entry point for our application 
+- We just have to run jwebserver, it will star the sever on default port
+- We have option to configure all possible options like port etc
+
+4. UTF-8 by Default
+- Before Java 18, the default character encoding depended on the operating system.
+- After java 18 default encoding is UTF-8 for all
+
+5. Deprecate Finalization for Removal
+- finalize() method are deprecated and marked for removal
+- Alternative we can use try-with-resources and AutoCloseable interface we can implement
 ====================================================================================================================================================================================

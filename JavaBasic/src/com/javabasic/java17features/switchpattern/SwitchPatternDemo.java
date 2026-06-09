@@ -25,7 +25,8 @@ public class SwitchPatternDemo {
 	// We can add null as separate case under switch
 	public static void testNullSupport(Object obj) {
 		switch (obj) {
-		case String s -> System.out.println(s);
+		// Before JDK 21 you can use && instead of when
+		case String s when s.length() > 5 -> System.out.println(s);
 		case null -> System.out.println("Unknown");
 		default -> throw new IllegalArgumentException();
 		}
