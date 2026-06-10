@@ -2949,3 +2949,48 @@ B Exhaustive Switch
 - Socket : Client-side connection
 - ServerSocket : Server-side listener
 ====================================================================================================================================================================================
+
+** JAR File (Jara Archive)
+
+- A JAR (Java Archive) file is a compressed file format used to package Java classes, resources, and metadata into a single file.
+- JAR structure
+
+META-INF/
+ └── MANIFEST.MF
+
+com/example/App.class
+com/example/Utils.class
+application.properties
+logo.png
+
+- MANIFEST.MF structure
+
+Manifest-Version: 1.0
+Main-Class: com.example.App
+Class-Path : .
+
+- The Main-Class tells Java which class contains the main() method.
+- Command to create JAR : jar -cvf jarfilename.jar . (. is include all classes, we can specify name as well)
+- Check content of JAR : jar -tvf jarfilename.jar
+- Extract JAR file : jar - xvd jarfilename.jar
+- Execute jar fiel : java -jar jarfilename.jar
+
+1. Fat JAR
+- A JAR containing the application and all its dependencies.
+
+====================================================================================================================================================================================
+
+** Maven & JUnit
+
+- Maven is a build automation and dependency management tool for Java projects.
+- Maven project configuration is stored in pom.xml (POM = Project Object Model)
+
+| Dependency                             | Plugin                                                  |
+| -------------------------------------- | ------------------------------------------------------- |
+| Used by your application code          | Used by Maven during the build process                  |
+| Added to classpath                     | Executed by Maven                                       |
+| Provides libraries/frameworks          | Provides build functionality                            |
+| Used at compile/runtime/test time      | Used during build phases (compile, test, package, etc.) |
+| Example: Spring Boot, Hibernate, JUnit | Example: Compiler Plugin, Surefire Plugin               |
+
+====================================================================================================================================================================================
