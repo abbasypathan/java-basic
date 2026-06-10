@@ -2922,3 +2922,23 @@ B Exhaustive Switch
 - finalize() method are deprecated and marked for removal
 - Alternative we can use try-with-resources and AutoCloseable interface we can implement
 ====================================================================================================================================================================================
+
+** Java 19 to 21 Features
+
+1. Virtual Thread
+2. Sequenced Collection
+3. Record Pattern (finalized)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Virtual Thread
+- Virtual Threads are lightweight threads managed by the JVM instead of the OS.
+- Before Java 21, creating thousands of platform threads was expensive because each thread mapped to an OS thread.
+- Java 21 introduces virtual threads to support millions of concurrent tasks with very low memory overhead.
+
+2. Sequenced Collection
+- Before Java 21, collections like LinkedHashSet and LinkedHashMap preserved insertion order, but there was no common API to access first/last elements.
+- SequencedCollection, SequencedSet, SequencedMap
+
+3. Record Pattern (finalized)
+- Record Patterns make it easy to extract values from records without manually calling accessor methods.
+====================================================================================================================================================================================
