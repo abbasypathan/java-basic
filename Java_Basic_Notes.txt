@@ -2942,3 +2942,10 @@ B Exhaustive Switch
 3. Record Pattern (finalized)
 - Record Patterns make it easy to extract values from records without manually calling accessor methods.
 ====================================================================================================================================================================================
+
+** Socket Programing
+
+- Socket Programming in Java is used for communication between two applications over a network using TCP/IP or UDP.
+- Socket : Client-side connection
+- ServerSocket : Server-side listener
+====================================================================================================================================================================================
