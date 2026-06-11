@@ -2994,3 +2994,18 @@ Class-Path : .
 | Example: Spring Boot, Hibernate, JUnit | Example: Compiler Plugin, Surefire Plugin               |
 
 ====================================================================================================================================================================================
+
+** Debugging Fundamentals
+
+- Debugging is the process of identifying, analyzing, and fixing issues in your code while it is running.
+- A marker where execution pauses so variables and program state can be inspected.
+- Step Into enters the called method.
+- Step Over executes the method and moves to the next line.
+- A stack containing active method calls, with the currently executing method at the top.
+- Usually we use Breakpoints, Step Into, Step Over, Call Stack, Stack Trace, Conditional Breakpoints, and Exception Breakpoints.
+====================================================================================================================================================================================
+
+** Math Class
+
+- The Math class in Java provides utility methods for performing mathematical operations. It belongs to the java.lang package, so no import is required.
+====================================================================================================================================================================================
